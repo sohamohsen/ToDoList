@@ -43,11 +43,6 @@ public class ToDoController {
         return toDoRepo.findByTodoListId(toDoListId);
     }
 
-    @GetMapping("gettodosbylistitle/{title}")
-    public List<ToDo> findByToDoList_Titlettle(@PathVariable String title){
-        return toDoRepo.findByToDoList_Title(title);
-    }
-
     @PostMapping("/addtodo")
     public ToDo addToDo(@RequestBody ToDo toDo){
         return toDoRepo.save(toDo);
