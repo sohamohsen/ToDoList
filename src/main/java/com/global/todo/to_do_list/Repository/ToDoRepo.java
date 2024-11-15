@@ -16,6 +16,4 @@ public interface ToDoRepo extends JpaRepository<ToDo, Integer> {
     @Query("SELECT t FROM ToDo t WHERE t.toDoListId = :toDoListId")
     List<ToDo> findByTodoListId(@Param("toDoListId") int toDoListId);
 
-    @Query("SELECT t FROM ToDo t WHERE t.toDoListId = :toDoListId")
-    List<ToDo> findByToDoList_Title(@param ("title")String title);
 }
