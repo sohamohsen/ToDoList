@@ -1,8 +1,6 @@
 package com.global.todo.to_do_list.Service;
 
 import com.global.todo.to_do_list.Model.ToDo;
-import com.global.todo.to_do_list.Model.ToDoList;
-import com.global.todo.to_do_list.Repository.ToDoListRepo;
 import com.global.todo.to_do_list.Repository.ToDoRepo;
 import org.springframework.stereotype.Service;
 
