@@ -2,6 +2,7 @@ package com.global.todo.to_do_list.Service;
 
 import com.global.todo.to_do_list.Model.ToDo;
 import com.global.todo.to_do_list.Repository.ToDoRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,59 +11,96 @@ import java.util.Optional;
 @Service
 public class ToDoService {
 
-    private  ToDoRepo toDoRepo;
+    private final ToDoRepo toDoRepo;
 
-
-    public Optional<ToDo> markToDoAsCompleted(int id) {
-        // Retrieve the ToDo item by id
-        Optional<ToDo> optionalToDo = toDoRepo.findById(id);
-
-        // Check if the ToDo item exists
-        if (optionalToDo.isPresent()) {
-            ToDo toDo = optionalToDo.get();
-            // Mark it as completed
-            toDo.setCompleted(true);
-            // Save the updated ToDo item
-            return Optional.of(toDoRepo.save(toDo));
-        }
-
-        // If the ToDo item does not exist, return an empty Optional
-        return Optional.empty();
+    @Autowired
+    public ToDoService(ToDoRepo toDoRepo) {
+        this.toDoRepo = toDoRepo;
     }
 
+    /**
+     * Marks a ToDo item as completed.
+     * @param id The ID of the ToDo item to be marked as completed.
+     * @return The updated ToDo item wrapped in an Optional, or an empty Optional if not found.
+     */
+    public Optional<ToDo> markToDoAsCompleted(int id) {
+        return toDoRepo.findById(id).map(toDo -> {
+            toDo.setCompleted(true);
+            return toDoRepo.save(toDo);
+        });
+    }
 
-    public int count(){
+    /**
+     * Counts the total number of ToDo items.
+     * @return The total count of ToDo items.
+     */
+    public int countToDos() {
         return (int) toDoRepo.count();
     }
 
-    public ToDo addToDo (ToDo toDo){
+    /**
+     * Adds a new ToDo item.
+     * @param toDo The ToDo item to be added.
+     * @return The saved ToDo item.
+     */
+    public ToDo addToDo(ToDo toDo) {
         return toDoRepo.save(toDo);
     }
 
-    public List<ToDo> findAll(){
+    /**
+     * Retrieves all ToDo items.
+     * @return A list of all ToDo items.
+     */
+    public List<ToDo> getAllToDos() {
         return toDoRepo.findAll();
     }
 
-    public Optional<ToDo> findById (int id){
+    /**
+     * Retrieves a ToDo item by its ID.
+     * @param id The ID of the ToDo item.
+     * @return The ToDo item wrapped in an Optional, or an empty Optional if not found.
+     */
+    public Optional<ToDo> getToDoById(int id) {
         return toDoRepo.findById(id);
     }
 
-    public List<ToDo> findByTodoListId(int toDoListId) {
+    /**
+     * Retrieves all ToDo items by their list ID.
+     * @param toDoListId The ID of the ToDo list.
+     * @return A list of ToDo items belonging to the specified list.
+     */
+    public List<ToDo> getToDosByListId(int toDoListId) {
         return toDoRepo.findByTodoListId(toDoListId);
     }
 
+    /**
+     * Retrieves ToDo items by their list title.
+     * @param title The title of the ToDo list.
+     * @return A list of ToDo items belonging to lists with the specified title.
+     */
+    public List<ToDo> getToDosByListTitle(String title) {
+        return toDoRepo.findByToDoListTitle(title);
+    }
 
-//    public List<ToDo> findByListTitle(String title) {
-//        return toDoRepo.findByToDoList_Title(title);
-//    }
-
-
-    public List<ToDo> findByTitle(String title){
+    /**
+     * Retrieves ToDo items by their title.
+     * @param title The title of the ToDo items.
+     * @return A list of ToDo items matching the specified title.
+     */
+    public List<ToDo> getToDosByTitle(String title) {
         return toDoRepo.findByTitle(title);
     }
 
-    public void DeleteToDo(int id){
-        toDoRepo.deleteById(id);
+    /**
+     * Deletes a ToDo item by its ID.
+     * @param id The ID of the ToDo item to be deleted.
+     * @throws IllegalArgumentException if the ToDo item with the specified ID does not exist.
+     */
+    public void deleteToDoById(int id) {
+        if (toDoRepo.existsById(id)) {
+            toDoRepo.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("ToDo with ID " + id + " does not exist.");
+        }
     }
-
 }

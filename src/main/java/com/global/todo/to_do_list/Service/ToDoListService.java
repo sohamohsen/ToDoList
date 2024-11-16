@@ -2,7 +2,6 @@ package com.global.todo.to_do_list.Service;
 
 import com.global.todo.to_do_list.Model.ToDoList;
 import com.global.todo.to_do_list.Repository.ToDoListRepo;
-import com.global.todo.to_do_list.Repository.ToDoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,33 +12,58 @@ import java.util.Optional;
 public class ToDoListService {
 
     private final ToDoListRepo toDoListRepo;
-    private final ToDoRepo toDoRepo;
 
     @Autowired
-    public ToDoListService(ToDoListRepo toDoListRepo, ToDoRepo toDoRepo) {
+    public ToDoListService(ToDoListRepo toDoListRepo) {
         this.toDoListRepo = toDoListRepo;
-        this.toDoRepo = toDoRepo;
     }
 
-    // Method to create and save a new ToDoList
+    /**
+     * Create and save a new ToDoList.
+     * @param toDoList The ToDoList to be created.
+     * @return The saved ToDoList.
+     */
     public ToDoList createToDoList(ToDoList toDoList) {
-        // Ensure that the `toDoList` object is properly populated before saving
+        // Validate input if necessary before saving
         return toDoListRepo.save(toDoList);
     }
 
-    public List<ToDoList> findAll(){
+    /**
+     * Retrieve all ToDoLists.
+     * @return List of all ToDoLists.
+     */
+    public List<ToDoList> getAllToDoLists() {
         return toDoListRepo.findAll();
     }
 
-    public Optional<ToDoList> findById(int id){
+    /**
+     * Retrieve a specific ToDoList by its ID.
+     * @param id The ID of the ToDoList.
+     * @return An Optional containing the ToDoList if found, or empty otherwise.
+     */
+    public Optional<ToDoList> getToDoListById(int id) {
         return toDoListRepo.findById(id);
     }
 
-    public List<ToDoList> findByTitle(String title){
+    /**
+     * Search for ToDoLists by their title.
+     * @param title The title to search for.
+     * @return List of ToDoLists matching the given title.
+     */
+    public List<ToDoList> searchToDoListsByTitle(String title) {
         return toDoListRepo.findByTitle(title);
     }
 
-    public void DeleteToDoList(int id){
-        toDoListRepo.deleteById(id);
+    /**
+     * Delete a ToDoList by its ID.
+     * @param id The ID of the ToDoList to delete.
+     * @throws IllegalArgumentException if the ToDoList with the given ID does not exist.
+     */
+    public void deleteToDoListById(int id) {
+        if (toDoListRepo.existsById(id)) {
+            toDoListRepo.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("ToDoList with ID " + id + " does not exist.");
+        }
     }
 }
