@@ -34,4 +34,21 @@ public interface ToDoRepo extends JpaRepository<ToDo, Integer> {
     @Query("SELECT t FROM ToDo t WHERE t.toDoList.title = :title")
     List<ToDo> findByToDoListTitle(@Param("title") String title);
 
+    /**
+     * Finds ToDo items by the ID of their priority.
+     * @param priorityId The ID of the ToDo.
+     * @return A list of ToDo items belonging to the specified priority.
+     */
+    @Query("SELECT t FROM ToDo t WHERE t.priorityId = :priorityId")
+    List<ToDo> findByTodoByPriorityId(@Param("priorityId") int priorityId);
+
+    /**
+     * Finds ToDo items by the name of their parent ToDo priority.
+     * @param name The namr of the ToDo priority.
+     * @return A list of ToDo items belonging to the priority with the specified name.
+     */
+    @Query("SELECT t FROM ToDo t WHERE t.priority.name = :name")
+    List<ToDo> findByToDoPriorityName(@Param("name") String name);
+
+
 }

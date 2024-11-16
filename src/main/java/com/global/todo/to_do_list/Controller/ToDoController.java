@@ -91,6 +91,28 @@ public class ToDoController {
     }
 
     /**
+     * Retrieve ToDo entries by their associated priority ID
+     * @param priorityId ID of the priority
+     * @return List of ToDos associated with the provided priority ID
+     */
+    @GetMapping("/list/{priorityId}/todos")
+    public ResponseEntity<List<ToDo>> getToDosByPriorityId(@PathVariable int priorityId) {
+        List<ToDo> todos = toDoRepo.findByTodoByPriorityId(priorityId);
+        return todos.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(todos);
+    }
+
+    /**
+     * Search ToDo entries by their associated priority name
+     * @param name Title of the priority
+     * @return List of ToDo associated with the provided priority name
+     */
+    @GetMapping("/list/search/by-priorityname/{name}")
+    public ResponseEntity<List<ToDo>> searchToDosByPriorityTitle(@PathVariable String name) {
+        List<ToDo> todos = toDoRepo.findByToDoPriorityName(name);
+        return todos.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(todos);
+    }
+
+    /**
      * Create a new ToDo entry
      * @param toDo ToDo object to be created
      * @return The newly created ToDo entry

@@ -83,12 +83,21 @@ public class ToDoService {
     }
 
     /**
-     * Retrieves ToDo items by their title.
-     * @param title The title of the ToDo items.
-     * @return A list of ToDo items matching the specified title.
+     * Retrieves all ToDo items by their priority ID.
+     * @param priorityId The ID of the ToDo priority.
+     * @return A list of ToDo items belonging to the specified priority.
      */
-    public List<ToDo> getToDosByTitle(String title) {
-        return toDoRepo.findByTitle(title);
+    public List<ToDo> getToDosByPriorityId(int priorityId) {
+        return toDoRepo.findByTodoByPriorityId(priorityId);
+    }
+
+    /**
+     * Retrieves ToDo items by their priority name.
+     * @param name The priority name of the ToDo items.
+     * @return A list of ToDo items matching the specified priority name.
+     */
+    public List<ToDo> getToDosByPriorityName(String name) {
+        return toDoRepo.findByToDoPriorityName(name);
     }
 
     /**
