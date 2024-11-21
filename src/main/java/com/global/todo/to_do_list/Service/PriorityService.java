@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 public class PriorityService {
-    private final PriorityRepo priorityRepo;
+    private  PriorityRepo priorityRepo;
 
     @Autowired
     public PriorityService(PriorityRepo priorityRepo) {

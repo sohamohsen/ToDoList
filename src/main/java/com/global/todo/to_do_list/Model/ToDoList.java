@@ -2,6 +2,8 @@ package com.global.todo.to_do_list.Model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "to_do_list")
 public class ToDoList {
@@ -9,6 +11,11 @@ public class ToDoList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
+
+//    // Corrected annotation for the relationship mapping
+//    @OneToMany
+//    @JoinColumn(name = "id", referencedColumnName = "to_do_list_id")
+//    private List<ToDo> toDos;
 
     public ToDoList() {
     }

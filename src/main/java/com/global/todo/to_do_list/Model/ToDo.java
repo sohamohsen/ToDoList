@@ -1,5 +1,6 @@
 package com.global.todo.to_do_list.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -36,6 +37,7 @@ public class ToDo {
 
     @ManyToOne
     @JoinColumn(name = "priority_id", referencedColumnName = "id")
+    @JsonIgnore
     private Priority priority;
 
     // Getters and Setters

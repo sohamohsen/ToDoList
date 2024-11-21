@@ -2,6 +2,7 @@ package com.global.todo.to_do_list.Controller;
 
 import com.global.todo.to_do_list.Model.ToDo;
 import com.global.todo.to_do_list.Repository.ToDoRepo;
+import com.global.todo.to_do_list.Service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,8 @@ public class ToDoController {
 
     @Autowired
     private ToDoRepo toDoRepo;
+    @Autowired
+    private ToDoService toDoService;
 
     /**
      * Retrieve all ToDo entries
@@ -95,9 +98,9 @@ public class ToDoController {
      * @param priorityId ID of the priority
      * @return List of ToDos associated with the provided priority ID
      */
-    @GetMapping("/list/{priorityId}/todos")
+    @GetMapping("/priority/{priorityId}")
     public ResponseEntity<List<ToDo>> getToDosByPriorityId(@PathVariable int priorityId) {
-        List<ToDo> todos = toDoRepo.findByTodoByPriorityId(priorityId);
+        List<ToDo> todos = toDoService.findByPriorityId(priorityId);
         return todos.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(todos);
     }
 

@@ -87,8 +87,8 @@ public class ToDoService {
      * @param priorityId The ID of the ToDo priority.
      * @return A list of ToDo items belonging to the specified priority.
      */
-    public List<ToDo> getToDosByPriorityId(int priorityId) {
-        return toDoRepo.findByTodoByPriorityId(priorityId);
+    public List<ToDo> findByPriorityId(int priorityId) {
+        return toDoRepo.findByPriorityId(priorityId);
     }
 
     /**
@@ -112,4 +112,5 @@ public class ToDoService {
             throw new IllegalArgumentException("ToDo with ID " + id + " does not exist.");
         }
     }
+
 }
