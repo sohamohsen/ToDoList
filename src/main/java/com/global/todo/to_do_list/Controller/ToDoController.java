@@ -1,8 +1,8 @@
-package com.global.todo.to_do_list.Controller;
+package Controller;
 
-import com.global.todo.to_do_list.Model.ToDo;
-import com.global.todo.to_do_list.Repository.ToDoRepo;
-import com.global.todo.to_do_list.Service.ToDoService;
+import Model.ToDo;
+import Repository.ToDoRepo;
+import Service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

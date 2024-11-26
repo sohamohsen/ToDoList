@@ -1,8 +1,7 @@
-package com.global.todo.to_do_list.Service;
+package Service;
 
-import com.global.todo.to_do_list.Model.Priority;
-import com.global.todo.to_do_list.Model.ToDoList;
-import com.global.todo.to_do_list.Repository.PriorityRepo;
+import Model.Priority;
+import Repository.PriorityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +48,7 @@ public class PriorityService {
      * @param name The name to search for.
      * @return List of priorities matching the given name.
      */
-    public List<ToDoList> searchPriorityByName(String name) {
+    public List<Priority> searchPriorityByName(String name) {
         return priorityRepo.findByName(name);
     }
 

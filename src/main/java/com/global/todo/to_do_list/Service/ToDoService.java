@@ -1,7 +1,7 @@
-package com.global.todo.to_do_list.Service;
+package Service;
 
-import com.global.todo.to_do_list.Model.ToDo;
-import com.global.todo.to_do_list.Repository.ToDoRepo;
+import Model.ToDo;
+import Repository.ToDoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,7 +67,7 @@ public class ToDoService {
     /**
      * Retrieves all ToDo items by their list ID.
      * @param toDoListId The ID of the ToDo list.
-     * @return A list of ToDo items belonging to the specified list.
+     * @return A list of ToDo items beinting to the specified list.
      */
     public List<ToDo> getToDosByListId(int toDoListId) {
         return toDoRepo.findByTodoListId(toDoListId);
@@ -76,7 +76,7 @@ public class ToDoService {
     /**
      * Retrieves ToDo items by their list title.
      * @param title The title of the ToDo list.
-     * @return A list of ToDo items belonging to lists with the specified title.
+     * @return A list of ToDo items beinting to lists with the specified title.
      */
     public List<ToDo> getToDosByListTitle(String title) {
         return toDoRepo.findByToDoListTitle(title);
@@ -85,7 +85,7 @@ public class ToDoService {
     /**
      * Retrieves all ToDo items by their priority ID.
      * @param priorityId The ID of the ToDo priority.
-     * @return A list of ToDo items belonging to the specified priority.
+     * @return A list of ToDo items beinting to the specified priority.
      */
     public List<ToDo> findByPriorityId(int priorityId) {
         return toDoRepo.findByPriorityId(priorityId);
@@ -112,5 +112,4 @@ public class ToDoService {
             throw new IllegalArgumentException("ToDo with ID " + id + " does not exist.");
         }
     }
-
 }

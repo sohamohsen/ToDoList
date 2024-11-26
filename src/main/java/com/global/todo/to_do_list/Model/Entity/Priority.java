@@ -2,7 +2,6 @@ package com.global.todo.to_do_list.Model;
 
 import jakarta.persistence.*;
 
-import java.nio.MappedByteBuffer;
 import java.util.List;
 
 @Entity
@@ -14,16 +13,8 @@ public class Priority {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "priority")
     private List<ToDo> todos;
-
-    public Priority(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Priority() {
-    }
 
     public int getId() {
         return id;

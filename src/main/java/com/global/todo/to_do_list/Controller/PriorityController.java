@@ -1,7 +1,7 @@
-package com.global.todo.to_do_list.Controller;
+package Controller;
 
-import com.global.todo.to_do_list.Model.Priority;
-import com.global.todo.to_do_list.Repository.PriorityRepo;
+import Model.Priority;
+import Repository.PriorityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
